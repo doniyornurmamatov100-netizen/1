@@ -1,0 +1,119 @@
+[
+  {
+    "cat_code": "11",
+    "cat1": "Maishiy texnika",
+    "cat2": "Katta maishiy texnika",
+    "cat3": "Pechlar",
+    "cat4": "",
+    "cat5": "",
+    "fbo": 0.10
+  },
+  {
+    "cat_code": "13",
+    "cat1": "Maishiy texnika",
+    "cat2": "Katta maishiy texnika",
+    "cat3": "Pechkalar",
+    "cat4": "Gaz pechkalar",
+    "cat5": "",
+    "fbo": 0.10
+  },
+  {
+    "cat_code": "14",
+    "cat1": "Kitoblar",
+    "cat2": "Diniy kitoblar",
+    "cat3": "Xristianlik",
+    "cat4": "Muqaddas matnlar",
+    "cat5": "",
+    "fbo": 0.20
+  },
+  {
+    "cat_code": "16",
+    "cat1": "Maishiy texnika",
+    "cat2": "Katta maishiy texnika",
+    "cat3": "Quritgich mashinasi",
+    "cat4": "",
+    "cat5": "",
+    "fbo": 0.10
+  },
+  {
+    "cat_code": "17",
+    "cat1": "Maishiy texnika",
+    "cat2": "Katta maishiy texnika",
+    "cat3": "Idish yuvish mashinalar",
+    "cat4": "",
+    "cat5": "",
+    "fbo": 0.10
+  },
+  {
+    "cat_code": "18",
+    "cat1": "Dacha, bogʻ va tomorqa",
+    "cat2": "Bogʻ asboblari",
+    "cat3": "Boltalar",
+    "cat4": "Bolta",
+    "cat5": "",
+    "fbo": 0.25
+  },
+  {
+    "cat_code": "22",
+    "cat1": "Qurilish va taʼmirlash",
+    "cat2": "Mahkamlagichlar va armatura",
+    "cat3": "Mahkamlash plastinalari",
+    "cat4": "Qisqichlar va bog'ichlar",
+    "cat5": "",
+    "fbo": 0.20
+  },
+  {
+    "cat_code": "24",
+    "cat1": "Qurilish va taʼmirlash",
+    "cat2": "Asboblar",
+    "cat3": "Elektr asboblar",
+    "cat4": "Elektr planerlar",
+    "cat5": "",
+    "fbo": 0.15
+  },
+  {
+    "cat_code": "26",
+    "cat1": "Qurilish va taʼmirlash",
+    "cat2": "Santexnika",
+    "cat3": "Santexnika armatura va aksessuarlar",
+    "cat4": "Ремкомплекты и запчасти",
+    "cat5": "",
+    "fbo": 0.25
+  },
+  {
+    "cat_code": "28",
+    "cat1": "Salomatlik",
+    "cat2": "Prezervativlar, lubrikantlar va prolongatorlar",
+    "cat3": "Prezervativlar",
+    "cat4": "",
+    "cat5": "",
+    "fbo": 0.25
+  },
+  {
+    "cat_code": "29",
+    "cat1": "Uy-roʻzgʻor buyumlari",
+    "cat2": "Mebel",
+    "cat3": "Poyabzal uchun javonlar",
+    "cat4": "",
+    "cat5": "",
+    "fbo": 0.20
+  },
+  {
+    "cat_code": "62",
+    "cat1": "Oziq-ovqat mahsulotlari",
+    "cat2": "Suv, sharbatlar, ichimliklar",
+    "cat3": "Energetik ichimliklar",
+    "cat4": "",
+    "cat5": "",
+    "fbo": 0.15
+  },
+  {
+    "cat_code": "63",
+    "cat1": "Uy-roʻzgʻor buyumlari",
+    "cat2": "Mebel",
+    "cat3": "Seyflar",
+    "cat4": "",
+    "cat5": "",
+    "fbo": 0.15
+  }
+]

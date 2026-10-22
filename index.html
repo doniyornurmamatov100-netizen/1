@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <!-- SheetJS (Excel o'qish uchun) -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uzum Calc - Moliyaviy Kalkulyator</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar / Yon menyu -->
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+        </div>
+        <span>Uzum Calc</span>
+      </div>
+
+      <nav class="menu">
+        <button class="menu-item active" data-tab="calc">
+          <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+          Kalkulyator
+        </button>
+        <button class="menu-item" data-tab="products">
+          <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" y1="22" x2="12" y2="12"/></svg>
+          Mahsulotlarim
+        </button>
+        <button class="menu-item" data-tab="history">
+          <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Hisob-kitoblar tarixi
+        </button>
+        <button class="menu-item" data-tab="commission">
+          <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          Komissiya jadvali
+        </button>
+        <button class="menu-item" data-tab="settings">
+          <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-1-1.72v-.51a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+          Sozlamalar
+        </button>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+      <!-- 1. Kalkulyator Tab -->
+      <section id="tab-calc" class="tab-content active">
+        <div class="page-header">
+          <h1 class="page-title">Foyda kalkulyatori</h1>
+          <p class="page-subtitle">Mahsulot xarajatlarini kiriting va sof foydani ko'ring.</p>
+        </div>
+
+        <div class="calc-grid">
+          <!-- Kirish ma'lumotlari -->
+          <div class="card calc-form-card">
+            <h2 class="card-title">Kirish ma'lumotlari</h2>
+            <form id="calcForm" onsubmit="return false;">
+              <div class="form-group">
+                <label>Sotuv narxi, so'm</label>
+                <input type="number" id="sotuvNarxi" value="150000" placeholder="0">
+              </div>
+
+              <div class="form-group">
+                <label>Tannarx, so'm</label>
+                <input type="number" id="tannarx" value="70000" placeholder="0">
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Komissiya, %</label>
+                  <input type="number" id="komissiya" value="12" step="0.1" placeholder="0">
+                </div>
+                <div class="form-group">
+                  <label>Soliq, %</label>
+                  <input type="number" id="soliq" value="4" step="0.1" placeholder="0">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Logistika</label>
+                  <input type="number" id="logistika" value="8000" placeholder="0">
+                </div>
+                <div class="form-group">
+                  <label>Reklama</label>
+                  <input type="number" id="reklama" value="5000" placeholder="0">
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="button" class="btn btn-primary" id="saveResultBtn">Natijani saqlash</button>
+                <button type="button" class="btn btn-secondary" id="saveProductBtn">Mahsulotlarga qo'shish</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Natijalar paneli -->
+          <div class="calc-results-wrapper">
+            <div class="metrics-row">
+              <div class="card metric-card">
+                <span class="metric-label">Sof foyda</span>
+                <div class="metric-value primary-blue" id="resSofFoyda">43 000</div>
+              </div>
+              <div class="card metric-card">
+                <span class="metric-label">Marja</span>
+                <div class="metric-value dark-text" id="resMarja">28,7%</div>
+              </div>
+            </div>
+
+            <div class="card metric-card metric-card-full">
+              <span class="metric-label">ROI</span>
+              <div class="metric-value dark-text" id="resROI">61,4%</div>
+            </div>
+
+            <div class="card chart-card">
+              <h3 class="card-title">Xarajatlar ulushi</h3>
+              <div class="chart-container">
+                <canvas id="expensesChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Mahsulotlarim Tab -->
+      <section id="tab-products" class="tab-content">
+        <div class="page-header">
+          <h1 class="page-title">Mahsulotlarim</h1>
+          <p class="page-subtitle">Saqlangan mahsulotlaringiz ro'yxati va ularning foyda ko'rsatkichlari.</p>
+        </div>
+        <div class="card">
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Nomi</th>
+                  <th>Sotuv narxi</th>
+                  <th>Tannarx</th>
+                  <th>Xarajatlar</th>
+                  <th>Sof foyda</th>
+                  <th>Marja</th>
+                  <th>ROI</th>
+                  <th>Amallar</th>
+                </tr>
+              </thead>
+              <tbody id="productsTableBody">
+                <!-- JS orqali to'ldiriladi -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Hisob-kitoblar tarixi Tab -->
+      <section id="tab-history" class="tab-content">
+        <div class="page-header header-with-action">
+          <div>
+            <h1 class="page-title">Hisob-kitoblar tarixi</h1>
+            <p class="page-subtitle">Oldingi hisoblangan barcha natijalar tarixi.</p>
+          </div>
+          <button class="btn btn-outline-danger" id="clearHistoryBtn">Tarixni tozalash</button>
+        </div>
+        <div class="card">
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Sana</th>
+                  <th>Sotuv narxi</th>
+                  <th>Tannarx</th>
+                  <th>Komissiya</th>
+                  <th>Soliq</th>
+                  <th>Logistika</th>
+                  <th>Reklama</th>
+                  <th>Sof foyda</th>
+                  <th>Amallar</th>
+                </tr>
+              </thead>
+              <tbody id="historyTableBody">
+                <!-- JS orqali to'ldiriladi -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+<section id="tab-commission" class="tab-content">
+  <div class="page-header header-with-action">
+    <div>
+      <h1 class="page-title">Komissiya jadvali</h1>
+      <p class="page-subtitle">Marketplace kategoriyalari bo'yicha standart komissiya foizlari.</p>
+    </div>
+    <div style="display: flex; gap: 12px; align-items: center;">
+      <!-- Qidiruv inputi -->
+      <input type="text" id="commissionSearch" placeholder="Kategoriya bo'yicha qidirish..." onkeyup="filterCommissions()" style="padding: 10px 14px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 250px; font-size: 14px;">
+      
+      <!-- Excel yuklash tugmasi -->
+      <input type="file" id="excelFileExcel" accept=".xlsx, .xls, .csv" style="display: none;" onchange="handleExcelUpload(event)">
+      <button class="btn btn-primary" onclick="document.getElementById('excelFileExcel').click()">
+        📁 Excel yuklash (5000+)
+      </button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="table-responsive">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Kategoriya</th>
+            <th>Sub-kategoriya</th>
+            <th>Komissiya foizi</th>
+            <th>Amal</th>
+          </tr>
+        </thead>
+        <tbody id="commissionTableBody">
+          <!-- JS orqali to'ldiriladi -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+      <!-- 4. Komissiya jadvali Tab -->
+      <section id="tab-commission" class="tab-content">
+  <div class="page-header header-with-action">
+    <div>
+      <h1 class="page-title">Komissiya jadvali</h1>
+      <p class="page-subtitle">Marketplace kategoriyalari bo'yicha standart komissiya foizlari.</p>
+    </div>
+    <!-- Excel yuklash tugmasi -->
+    <div class="upload-box">
+      <input type="file" id="excelFileExcel" accept=".xlsx, .xls, .csv" style="display: none;" onchange="handleExcelUpload(event)">
+      <button class="btn btn-primary" onclick="document.getElementById('excelFileExcel').click()">
+        📁 Excel yuklash (5000+ qator)
+      </button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="table-responsive">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Kategoriya</th>
+            <th>Sub-kategoriya</th>
+            <th>Komissiya foizi</th>
+            <th>Amal</th>
+          </tr>
+        </thead>
+        <tbody id="commissionTableBody">
+          <!-- JS orqali to'ldiriladi -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+      <!-- 5. Sozlamalar Tab -->
+      <section id="tab-settings" class="tab-content">
+        <div class="page-header">
+          <h1 class="page-title">Sozlamalar</h1>
+          <p class="page-subtitle">Ilova parametrlarini va standart ko'rsatkichlarni sozlang.</p>
+        </div>
+        <div class="card max-w-600">
+          <h2 class="card-title">Standart qiymatlar</h2>
+          <form id="settingsForm" onsubmit="return false;">
+            <div class="form-group">
+              <label>Standart Soliq foizi (%)</label>
+              <input type="number" id="defaultTax" value="4">
+            </div>
+            <div class="form-group">
+              <label>Valyuta belgisi</label>
+              <input type="text" id="currencySymbol" value="so'm">
+            </div>
+            <button class="btn btn-primary" id="saveSettingsBtn">Sozlamalarni saqlash</button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
